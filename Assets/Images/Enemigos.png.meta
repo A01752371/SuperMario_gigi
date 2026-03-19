@@ -156,6 +156,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Enemigos_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 18
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2283eb2cb92a7b743be8c5710780a117
+      internalID: 1878284406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -174,6 +196,7 @@ TextureImporter:
     nameFileIdTable:
       Enemigos_0: -8283504241884404996
       Enemigos_1: 733722520
+      Enemigos_2: 1878284406
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

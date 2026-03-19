@@ -15,30 +15,30 @@ public class GoombaPatrulla : MonoBehaviour
 
     void Update()
     {
+        // Movimiento constante
         rb.linearVelocity = new Vector2(direccion * velocidad, rb.linearVelocity.y);
     }
 
     void OnCollisionStay2D(Collision2D collision)
     {
+        //  1. Si toca a Mario → desaparece y NO cambia dirección
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.SetActive(false);
+            return; //  evita que entre a la lógica de dirección
+        }
+
+        //  2. Cambiar dirección SOLO si es choque lateral
         foreach (ContactPoint2D contacto in collision.contacts)
         {
-            //  SOLO colisión lateral
             if (Mathf.Abs(contacto.normal.x) > 0.5f && puedeCambiar)
             {
                 direccion *= -1;
                 puedeCambiar = false;
+
+                // evita que cambie mil veces seguido
                 Invoke("ResetCambio", 0.2f);
                 break;
-            }
-        }
-
-        //  Si toca a Mario
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            SpriteRenderer sr = collision.gameObject.GetComponent<SpriteRenderer>();
-            if (sr != null)
-            {
-                sr.enabled = false;
             }
         }
     }
