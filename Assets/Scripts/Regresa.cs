@@ -2,27 +2,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class Regresa : MonoBehaviour
+public class RegresarJuego : MonoBehaviour
 {
-    private UIDocument menu;
-    private Button botonRegresar;
+    private Button botonRegresa;
 
     void OnEnable()
     {
-        menu=GetComponent<UIDocument>();
-        var root= menu.rootVisualElement; 
+        var root = GetComponent<UIDocument>().rootVisualElement;
 
-        botonRegresar=root.Q<Button>("BotonRegresa");
-        botonRegresar.clicked += CerrarEscena;
+        botonRegresa = root.Q<Button>("BotonRegresa");
+
+        if (botonRegresa != null)
+        {
+            botonRegresa.RegisterCallback<ClickEvent>(RegresarMenu);
+        }
+        else
+        {
+            Debug.LogError("No se encontró BotonRegresa");
+        }
     }
 
-     void OnDisable()
+    void OnDisable()
     {
-        botonRegresar.clicked -= CerrarEscena;
+        if (botonRegresa != null)
+        {
+            botonRegresa.UnregisterCallback<ClickEvent>(RegresarMenu);
+        }
     }
 
-    void CerrarEscena()
+    void RegresarMenu(ClickEvent evt)
     {
+        Debug.Log("Regresando al menú...");
         SceneManager.LoadScene("EscenaMenu");
     }
 }
