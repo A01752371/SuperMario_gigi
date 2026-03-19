@@ -19,6 +19,7 @@ public class CambiaAnimacion : MonoBehaviour
     void Update()
     {
         animator.SetFloat("velocidad", MathF.Abs(rb.linearVelocityX));
+        animator.SetFloat("velocidadVertical", rb.linearVelocityY);
 
         sr.flipX = rb.linearVelocityX < 0;
 

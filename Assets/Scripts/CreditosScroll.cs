@@ -3,52 +3,40 @@ using UnityEngine.UIElements;
 
 public class CreditosScroll : MonoBehaviour
 {
-    public float speed = 40f;
+    private VisualElement texto;
 
-    private Label valeria;
-    private float y = 0f;
-    private float alturaMitad = 0f;
-    private bool listo = false;
+    private float posicionY;
+    private float velocidad = 30f; // más rápido porque Update usa deltaTime
+    private bool mover = true;
 
-    void Start()
+    void OnEnable()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        valeria = root.Q<Label>("Valeria");
 
-        if (valeria == null)
+        // BUSCA EXACTAMENTE tu label
+        texto = root.Q<VisualElement>("Valeria");
+
+        if (texto != null)
         {
-            Debug.LogError("No se encontró Valeria");
-            return;
+            // agarramos la posición REAL desde el UXML
+            posicionY = texto.resolvedStyle.top;
         }
-
-        // Esperar a que el layout tenga tamaño real
-        valeria.RegisterCallback<GeometryChangedEvent>(evt =>
-        {
-            // Altura total del texto renderizado
-            float h = valeria.resolvedStyle.height;
-
-            // Como duplicaste el contenido, usamos la mitad
-            alturaMitad = h / 2f;
-
-            // Asegura que empezamos desde arriba
-            y = 0f;
-            listo = true;
-        });
     }
 
     void Update()
     {
-        if (!listo) return;
+        if (texto == null || !mover) return;
 
-        y -= speed * Time.deltaTime;
+        posicionY -= velocidad * Time.deltaTime;
 
-        // 👇 ESTO mueve el contenido dentro del label (no el label)
-        valeria.style.top = y;
+        float altoTexto = texto.layout.height;
 
-        // 🔁 loop infinito sin corte (por duplicación)
-        if (y <= -alturaMitad)
+        // cuando se sale completamente del viewport, reinicia
+        if (posicionY < -altoTexto)
         {
-            y = 0f;
+            posicionY = 300f; // ajusta si quieres que reaparezca más abajo
         }
+
+        texto.style.top = posicionY;
     }
 }
