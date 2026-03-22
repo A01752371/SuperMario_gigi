@@ -25,27 +25,27 @@ public class Menu : MonoBehaviour
         menu = GetComponent<UIDocument>();
         var root = menu.rootVisualElement;
 
-        // 🔹 BOTONES MENÚ
+        //  BOTONES MENÚ
         botonJugar = root.Q<Button>("BotonJugar");
         botonAyuda = root.Q<Button>("BotonAyuda");
         botonCreditos = root.Q<Button>("BotonCreditos");
         botonSalir = root.Q<Button>("BotonSalir");
 
-        // 🔹 BOTONES REGRESAR
+        //  BOTONES REGRESAR
         regresarTutorial = root.Q<Button>("RegresarTutorial");
         regresarDatos = root.Q<Button>("RegresarDatos");
 
-        // 🔹 PANELES
+        //  PANELES
         entrada = root.Q<VisualElement>("Entrada");
         tutorial = root.Q<VisualElement>("Tutorial");
         datos = root.Q<VisualElement>("Datos");
 
-        // 🔹 ESTADO INICIAL
+        //  ESTADO INICIAL
         entrada.style.display = DisplayStyle.Flex;
         tutorial.style.display = DisplayStyle.None;
         datos.style.display = DisplayStyle.None;
 
-        // 🔥 CALLBACKS
+        //  CALLBACKS
 
         if (botonJugar != null)
             botonJugar.RegisterCallback<ClickEvent>(IrAJuego);
@@ -87,14 +87,14 @@ public class Menu : MonoBehaviour
             regresarDatos.UnregisterCallback<ClickEvent>(RegresarDesdeDatos);
     }
 
-    // 🎮 JUGAR
+    //  JUGAR
     void IrAJuego(ClickEvent evt)
     {
         Debug.Log("Ir a SampleScene");
         SceneManager.LoadScene("SampleScene");
     }
 
-    // ❓ AYUDA
+    //  AYUDA
     void AbrirAyuda(ClickEvent evt)
     {
         entrada.style.display = DisplayStyle.None;
@@ -102,7 +102,7 @@ public class Menu : MonoBehaviour
         datos.style.display = DisplayStyle.None;
     }
 
-    // ⭐ CREDITOS
+    //  CREDITOS
     void AbrirCreditos(ClickEvent evt)
     {
         entrada.style.display = DisplayStyle.None;
@@ -110,21 +110,21 @@ public class Menu : MonoBehaviour
         datos.style.display = DisplayStyle.Flex;
     }
 
-    // 🔙 REGRESAR DESDE TUTORIAL
+    //  REGRESAR DESDE TUTORIAL
     void RegresarDesdeTutorial(ClickEvent evt)
     {
         entrada.style.display = DisplayStyle.Flex;
         tutorial.style.display = DisplayStyle.None;
     }
 
-    // 🔙 REGRESAR DESDE DATOS
+    //  REGRESAR DESDE DATOS
     void RegresarDesdeDatos(ClickEvent evt)
     {
         entrada.style.display = DisplayStyle.Flex;
         datos.style.display = DisplayStyle.None;
     }
 
-    // ❌ SALIR DEL JUEGO
+    //  SALIR DEL JUEGO
     void SalirJuego(ClickEvent evt)
     {
         Debug.Log("Saliendo...");

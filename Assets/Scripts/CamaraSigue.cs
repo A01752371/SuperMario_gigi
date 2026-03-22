@@ -13,7 +13,6 @@ public class CamaraSigue : MonoBehaviour
 
     void Start()
     {
-        // Al empezar, recordamos la altura en la que pusiste la cámara en el editor
         alturaFija = transform.position.y;
     }
 

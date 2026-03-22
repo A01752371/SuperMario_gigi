@@ -36,7 +36,7 @@ public class GoombaPatrulla : MonoBehaviour
                 direccion *= -1;
                 puedeCambiar = false;
 
-                // evita que cambie mil veces seguido
+                // evita que cambie varias veces seguidas
                 Invoke("ResetCambio", 0.2f);
                 break;
             }
